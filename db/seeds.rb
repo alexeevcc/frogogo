@@ -1,9 +1,47 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+Product.destroy_all
+Cart.destroy_all
+CartItem.destroy_all
+
+goodyear_speaker = Product.create!(
+  name: "Беспроводная колонка Goodyear Bluetooth Speaker",
+  price: 1600.00,
+  image: "goodyear_speaker.jpg"
+)
+
+sweet_dreams_suit = Product.create!(
+  name: "Женский домашний костюм Sweet Dreams",
+  price: 800.00,
+  image: "sweet_dreams_suit.jpg"
+)
+
+swiss_oak_raincoat = Product.create!(
+  name: "Плащ-дождевик SwissOak",
+  price: 800.00,
+  image: "swiss_oak_raincoat.jpg"
+)
+
+cart = Cart.create!(
+  discount: 1000.00,
+  total_price: 3200.00,
+  final_price: 2200.00
+)
+
+CartItem.create!(
+  cart: cart,
+  product: goodyear_speaker,
+  quantity: 1
+)
+
+CartItem.create!(
+  cart: cart,
+  product: sweet_dreams_suit,
+  quantity: 1
+)
+
+CartItem.create!(
+  cart: cart,
+  product: swiss_oak_raincoat,
+  quantity: 2
+)
+
+puts "Сиды успешно созданы!"
