@@ -1,24 +1,31 @@
-# README
+# Entities
+## Product
+- id (bigint)
+- created_at (datetime)
+- updated_at (datetime)
+- image (string)
+- name (string)
+- price (decimal)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Cart
+- id (bigint)
+- created_at (datetime)
+- updated_at (datetime)
+- discount (decimal)
+- total_price (decimal)
+- final_price (decimal)
 
-Things you may want to cover:
+## CartItem
+- id (bigint)
+- created_at (datetime)
+- updated_at (datetime)
+- cart_id (bigint)
+- product_id (bigint)
+- quantity (integer)
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# UseCases
+- IncreaseCartItemQuantity
+- DecreaseCartItemQuantity
+- RemoveCartItem
+- ClearCart
+- ChangeCartDiscount
