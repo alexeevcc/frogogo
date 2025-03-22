@@ -6,8 +6,8 @@ class CartTest < ActiveSupport::TestCase
     assert cart.valid?
   end
 
-  test "should update total_price after discount update" do
-    cart = Cart.create(total_price: 1000.00, discount: 100.00)
+  test "should update final_price after discount update" do
+    cart = Cart.create(total_price: 1000.00, discount: 100.00, final_price: 900)
     cart.update(discount: 200.00)
     assert_equal 800.00, cart.final_price
   end
