@@ -5,7 +5,7 @@
 # `$XDG_CONFIG_HOME/git/ignore` or `~/.config/git/ignore`
 
 # Ignore IDE directory.
-/.idea
+.idea/
 
 # Ignore bundler config.
 /.bundle
