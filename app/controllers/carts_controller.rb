@@ -1,5 +1,8 @@
 class CartsController < ApplicationController
   def show
-    @items = CartItem.all
+    @items = @cart.cart_items
+    @products = Product.all
   end
+
+  def clear ;end
 end
