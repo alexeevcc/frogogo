@@ -1,6 +1,24 @@
-<div>
-  <h1>Корзина</h1>
-  <% @items.each do |item| %>
-    <h2><%= item.product.name %></h2>
-  <% end %>
+<div class="container mx-auto p-4">
+  <div>
+    <h1 class="text-3xl font-bold mb-4">Корзина</h1>
+    <%= @cart.total_price %>
+  </div>
+  <%= render "cart_items/cart_items" %>
+  <h2 class="text-2xl font-semibold mb-4">Доступные товары:</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <% @products.each do |product| %>
+      <div class="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+        <%= image_tag product.image,
+                      height: product.image.metadata["height"],
+                      width: product.image.metadata["width"],
+                      alt: product.name %>
+        <h3 class="text-lg font-medium"><%= product.name %></h3>
+        <p class="text-gray-600"><%= number_to_currency(product.price) %></p>
+        <%= button_to "Добавить в корзину",
+                      cart_items_path(product_id: product.id),
+                      method: :post,
+                      class: "mt-3 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded" %>
+      </div>
+    <% end %>
+  </div>
 </div>
