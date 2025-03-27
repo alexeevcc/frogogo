@@ -6,17 +6,17 @@ products = [
   {
     name: "Беспроводная колонка Goodyear Bluetooth Speaker",
     price: 1600.00,
-    image_path: Rails.root.join("app/assets/images/product-1.png")
+    image_path: Rails.root.join("app/assets/images/product-1.jpg")
   },
   {
     name: "Женский домашний костюм Sweet Dreams",
     price: 800.00,
-    image_path: Rails.root.join("app/assets/images/product-2.png")
+    image_path: Rails.root.join("app/assets/images/product-2.jpg")
   },
   {
     name: "Плащ-дождевик SwissOak",
     price: 800.00,
-    image_path: Rails.root.join("app/assets/images/product-3.png")
+    image_path: Rails.root.join("app/assets/images/product-3.jpg")
   }
 ]
 
