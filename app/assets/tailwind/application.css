@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@layer components {
+    .custom-range {
+        @apply w-full h-1 bg-teal-400 rounded-full appearance-none cursor-pointer;
+    }
+
+    .custom-range::-webkit-slider-thumb {
+        @apply appearance-none w-[38px] h-[38px] bg-teal-400 rounded-full cursor-pointer;
+    }
+
+    .custom-range::-moz-range-thumb {
+        @apply appearance-none w-[38px] h-[38px] bg-teal-400 rounded-full cursor-pointer border-none;
+    }
+}
