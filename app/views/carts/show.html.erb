@@ -1,9 +1,7 @@
-<div class="container mx-auto p-4">
-  <div>
-    <h1 class="text-3xl font-bold mb-4">Корзина</h1>
-    <%= @cart.total_price %>
-  </div>
+<div class="container mx-auto lg:w-3xl p-4">
+  <h1 class="text-xl md:text-2xl xl:text-[28px] font-semibold mb-4 text-gray-900">Корзина</h1>
   <%= render "cart_items/cart_items" %>
+  <%= render "carts/cart_total" %>
   <h2 class="text-2xl font-semibold mb-4">Доступные товары:</h2>
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
     <% @products.each do |product| %>
