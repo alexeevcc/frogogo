@@ -43,6 +43,9 @@ gem "tailwindcss-rails", "~> 4.2"
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
+# Use Active Storage Validations
+gem "active_storage_validations"
+
 # Use inline SVGs
 gem 'inline_svg'
 
@@ -66,4 +69,8 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "simplecov", require: false
+  gem "rubycritic"
+  gem "factory_bot_rails"
+  gem "faker"
 end
