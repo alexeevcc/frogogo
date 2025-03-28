@@ -1,1 +1,6 @@
-<%= turbo_stream.append("cart-items", partial: "cart_items") %>
+<% if @item.quantity == 1 %>
+  <%= turbo_stream.append("cart-items", partial: "cart_item", locals: { cart_item: @item }) %>
+<% else %>
+  <%= turbo_stream.replace(@item, partial: "cart_item", locals: { cart_item: @item }) %>
+<% end %>
+<%= turbo_stream.update "cart-total", partial: "carts/cart_total" %>
