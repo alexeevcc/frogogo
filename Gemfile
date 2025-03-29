@@ -47,7 +47,11 @@ gem "tailwindcss-rails", "~> 4.2"
 gem "active_storage_validations"
 
 # Use inline SVGs
-gem 'inline_svg'
+gem "inline_svg"
+
+# Use Request.JS for Rails
+# see: https://github.com/rails/requestjs-rails
+gem "requestjs-rails"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
