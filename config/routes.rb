@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   root "carts#show"
   post "carts/clear"
 
+  resources :carts, only: [:update]
   resources :cart_items, only: [:create, :update, :destroy]
 end

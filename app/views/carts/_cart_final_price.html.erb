@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "cart-final-price" do %>
+  <span class="font-bold text-[22px] whitespace-nowrap overflow-hidden min-w-max">
+    <%= number_to_currency(@cart.final_price, unit: "₽", format: "%n %u", delimiter: " ", precision: 0) %>
+  </span>
+<% end %>
