@@ -1,12 +1,19 @@
 <div class="container mx-auto lg:w-3xl p-4 md:p-0 md:my-4 flex flex-col gap-8">
   <div class="flex flex-row justify-between items-center">
     <h1 class="text-xl md:text-2xl xl:text-[28px] font-semibold text-gray-900">Корзина</h1>
-    <%= button_to "Очистить корзину", carts_clear_path, method: :post, class: "cursor-pointer text-sm text-gray-700" %>
+    <%= button_to "Очистить корзину",
+                  clear_cart_path(@cart),
+                  method: :delete,
+                  class: "cursor-pointer text-sm text-gray-700",
+                  data: { turbo_confirm: "Вы уверены, что хотите очистить корзину?" }
+    %>
   </div>
-  <%= render "cart_items/cart_items" %>
-  <%= render "carts/cart_total" %>
-  <%= button_to "Оформить", carts_clear_path, method: :post,
-                class: "bg-teal-400 hover:bg-teal-600 w-full rounded-lg py-[10px] text-white cursor-pointer" %>
+  <%= render "carts/cart" %>
+  <%= button_to "Оформить", clear_cart_path(@cart),
+                method: :delete,
+                class: "bg-teal-400 hover:bg-teal-600 w-full rounded-lg py-[10px] text-white cursor-pointer",
+                data: { turbo_confirm: "Вы уверены, что хотите очистить корзину?" }
+  %>
   <h2 class="text-2xl font-semibold mb-4">Доступные товары:</h2>
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
     <% @products.each do |product| %>

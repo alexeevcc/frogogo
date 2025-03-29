@@ -18,6 +18,13 @@ class Cart < ApplicationRecord
     )
   end
 
+  def clear
+    self.transaction do
+      cart_items.delete_all
+      update_columns(final_price: 0, total_price: 0, discount: 0)
+    end
+  end
+
   private
 
   def set_secret_id

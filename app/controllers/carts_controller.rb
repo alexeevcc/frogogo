@@ -7,7 +7,9 @@ class CartsController < ApplicationController
     @cart.update(cart_params)
   end
 
-  def clear ;end
+  def clear
+    @cart.clear
+  end
 
   private
 
