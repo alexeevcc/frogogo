@@ -1,2 +1,6 @@
 ru:
-  hello: "Привет, мир!"
+  cart_item:
+    one: товар
+    few: товара
+    many: товаров
+    other: товара
