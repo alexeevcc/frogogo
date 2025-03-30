@@ -29,25 +29,25 @@ class CartItemTest < ActiveSupport::TestCase
   test "invalid without cart" do
     item = build(:cart_item, cart: nil, product: @product)
     assert_not item.valid?
-    assert_equal ["must exist"], item.errors[:cart]
+    assert_equal ["не может отсутствовать"], item.errors[:cart]
   end
 
   test "invalid without product" do
     item = build(:cart_item, cart: @cart, product: nil)
     assert_not item.valid?
-    assert_equal ["must exist"], item.errors[:product]
+    assert_equal ["не может отсутствовать"], item.errors[:product]
   end
 
   test "invalid with non-positive quantity" do
     item = build(:cart_item, quantity: 0)
     assert_not item.valid?
-    assert_includes item.errors[:quantity], "must be greater than 0"
+    assert_includes item.errors[:quantity], "может иметь значение большее 0"
   end
 
   test "invalid with non-integer quantity" do
     item = build(:cart_item, quantity: 1.5)
     assert_not item.valid?
-    assert_includes item.errors[:quantity], "must be an integer"
+    assert_includes item.errors[:quantity], "не является целым числом"
   end
 
   test "does not allow duplicate products in same cart" do
@@ -55,7 +55,7 @@ class CartItemTest < ActiveSupport::TestCase
     duplicate_item = build(:cart_item, cart: @cart, product: @product)
 
     assert_not duplicate_item.valid?
-    assert_equal ["has already been taken"], duplicate_item.errors[:product_id]
+    assert_equal ["уже существует"], duplicate_item.errors[:product_id]
   end
 
   test "allows same product in different carts" do
@@ -74,7 +74,7 @@ class CartItemTest < ActiveSupport::TestCase
       duplicate.save!
     end
 
-    assert_match /has already been taken/, exception.message
+    assert_match /Возникли ошибки: Product уже существует/, exception.message
   end
 
   test "should have proper unique index in database" do

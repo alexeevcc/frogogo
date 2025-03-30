@@ -16,25 +16,25 @@ class ProductTest < ActiveSupport::TestCase
   test "should require name" do
     product = build(:product, name: nil)
     assert_not product.valid?
-    assert_equal ["can't be blank"], product.errors[:name]
+    assert_equal ["не может быть пустым"], product.errors[:name]
   end
 
   test "should require price" do
     product = build(:product, price: nil)
     assert_not product.valid?
-    assert_equal ["can't be blank", "is not a number"], product.errors[:price]
+    assert_equal ["не может быть пустым", "не является числом"], product.errors[:price]
   end
 
   test "should validate price numericality" do
     product = build(:product, price: "invalid")
     assert_not product.valid?
-    assert_equal ["is not a number"], product.errors[:price]
+    assert_equal ["не является числом"], product.errors[:price]
   end
 
   test "should validate price is greater than 0" do
     product = build(:product, price: 0)
     assert_not product.valid?
-    assert_equal ["must be greater than 0"], product.errors[:price]
+    assert_equal ["может иметь значение большее 0"], product.errors[:price]
   end
 
   test "should validate price precision" do
@@ -80,6 +80,6 @@ class ProductTest < ActiveSupport::TestCase
     )
 
     assert_not product.valid?
-    assert_equal ["has an invalid content type (authorized content types are PNG, JPG, WEBP)"], product.errors[:image]
+    assert_equal ["имеет недействительный тип контента (авторизованные типы контента PNG, JPG, WEBP)"], product.errors[:image]
   end
 end

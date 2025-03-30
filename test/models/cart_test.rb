@@ -16,15 +16,15 @@ class CartTest < ActiveSupport::TestCase
   test "should validate numericality of prices" do
     invalid_cart = build(:cart, total_price: "invalid", discount: "invalid")
     assert_not invalid_cart.valid?
-    assert_includes invalid_cart.errors[:total_price], "is not a number"
-    assert_includes invalid_cart.errors[:discount], "is not a number"
+    assert_includes invalid_cart.errors[:total_price], "не является числом"
+    assert_includes invalid_cart.errors[:discount], "не является числом"
   end
 
   test "should validate prices are greater than or equal to 0" do
     invalid_cart = build(:cart, total_price: -1, discount: -1)
     assert_not invalid_cart.valid?
-    assert_includes invalid_cart.errors[:total_price], "must be greater than or equal to 0"
-    assert_includes invalid_cart.errors[:discount], "must be greater than or equal to 0"
+    assert_includes invalid_cart.errors[:total_price], "может иметь значение большее или равное 0"
+    assert_includes invalid_cart.errors[:discount], "может иметь значение большее или равное 0"
   end
 
   test "should recalculate totals when cart_items change" do
