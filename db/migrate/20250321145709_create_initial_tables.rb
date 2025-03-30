@@ -12,21 +12,20 @@ class CreateInitialTables < ActiveRecord::Migration[8.0]
       t.decimal :discount, precision: 10, scale: 2, default: 0.0
       t.decimal :total_price, precision: 10, scale: 2, default: 0.0
       t.decimal :final_price, precision: 10, scale: 2, default: 0.0
+      t.string :uuid, null: false
 
       t.timestamps
     end
 
     create_table :cart_items do |t|
-      t.bigint :cart_id, null: false
-      t.bigint :product_id, null: false
+      t.references :cart, null: false, foreign_key: true
+      t.references :product, null: false, foreign_key: true
       t.integer :quantity, default: 1, null: false
 
       t.timestamps
     end
 
-    add_index :cart_items, :cart_id
-    add_index :cart_items, :product_id
-    add_foreign_key :cart_items, :carts
-    add_foreign_key :cart_items, :products
+    add_index :carts, :uuid, unique: true
+    add_index :cart_items, [:cart_id, :product_id], unique: true
   end
 end

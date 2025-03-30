@@ -6,11 +6,11 @@ class CartTest < ActiveSupport::TestCase
     @cart = create(:cart)
   end
 
-  test "should set secret_id before validation" do
-    cart = build(:cart, secret_id: nil)
+  test "should set uuid before validation" do
+    cart = build(:cart, uuid: nil)
     assert cart.valid?
-    assert_not_nil cart.secret_id
-    assert_match /\A[a-f0-9\-]+\d{10}\z/, cart.secret_id
+    assert_not_nil cart.uuid
+    assert_match /\A[a-f0-9\-]+\d{10}\z/, cart.uuid
   end
 
   test "should validate numericality of prices" do

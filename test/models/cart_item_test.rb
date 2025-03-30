@@ -79,6 +79,6 @@ class CartItemTest < ActiveSupport::TestCase
 
   test "should have proper unique index in database" do
     indexes = ActiveRecord::Base.connection.indexes(:cart_items)
-    assert indexes.any? { |i| i.columns == ["product_id", "cart_id"] && i.unique }
+    assert indexes.any? { |i| i.columns == ["cart_id", "product_id"] && i.unique }
   end
 end

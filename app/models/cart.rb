@@ -2,10 +2,10 @@ class Cart < ApplicationRecord
   has_many :cart_items, dependent: :destroy
   has_many :products, through: :cart_items
 
-  before_validation :set_secret_id
+  before_validation :generate_uuid, on: :create
   before_save :calculate_final_price
 
-  validates :secret_id,   presence: true, uniqueness: true
+  validates :uuid,   presence: true, uniqueness: true
   validates :total_price, numericality: { greater_than_or_equal_to: 0 }
   validates :discount,    numericality: { greater_than_or_equal_to: 0 }
   validate :final_price_non_negative
@@ -27,8 +27,8 @@ class Cart < ApplicationRecord
 
   private
 
-  def set_secret_id
-    self.secret_id ||= SecureRandom.uuid + DateTime.now.to_i.to_s
+  def generate_uuid
+    self.uuid ||= SecureRandom.uuid + DateTime.now.to_i.to_s
   end
 
   def calculate_final_price
