@@ -12,9 +12,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "carts#show"
 
-  resources :carts, only: [:update] do
-    delete :clear, on: :member
+  resource :cart, only: [] do
+    patch "update_discount"
+    delete :clear
   end
 
-  resources :cart_items, only: [:create, :update, :destroy]
+  resources :cart_items, only: %i[create update destroy]
 end

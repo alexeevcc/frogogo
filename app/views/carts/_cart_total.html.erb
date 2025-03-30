@@ -9,7 +9,7 @@
         <%= number_to_currency(@cart.total_price, unit: "₽", format: "%n %u", delimiter: " ", precision: 0) %>
       </span>
     </div>
-    <%= form_with model: @cart, method: :patch, data: { controller: "discount" } do |f| %>
+    <%= form_with url: update_discount_cart_path, method: :patch, data: { controller: "discount" } do |f| %>
       <div class="flex flex-row justify-between gap-4">
         <span class="text-[13px] text-gray-800">Передвигая слайдер, укажите сумму скидки</span>
         <span class="text-teal-400 font-semibold whitespace-nowrap overflow-hidden min-w-max"

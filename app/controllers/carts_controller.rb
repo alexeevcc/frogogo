@@ -3,17 +3,11 @@ class CartsController < ApplicationController
     @products = Product.all
   end
 
-  def update
-    @cart.update(cart_params)
+  def update_discount
+    @cart.update(discount: params[:discount])
   end
 
   def clear
     @cart.clear
-  end
-
-  private
-
-  def cart_params
-    params.require(:cart).permit(:discount)
   end
 end
