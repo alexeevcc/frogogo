@@ -1,6 +1,7 @@
 # Entities
 ## Product
 - id (bigint)
+- uuid (string)
 - created_at (datetime)
 - updated_at (datetime)
 - image (string)
