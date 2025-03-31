@@ -1,7 +1,8 @@
+# test/factories/products.rb
 FactoryBot.define do
   factory :product do
     sequence(:name) { |n| "Product #{n}" }
-    price { 1000.00 }
+    price { 1600.00 }
 
     trait :with_image do
       after(:build) do |product|
@@ -11,14 +12,6 @@ FactoryBot.define do
           content_type: 'image/jpg'
         )
       end
-    end
-
-    trait :expensive do
-      price { 10_000.00 }
-    end
-
-    trait :cheap do
-      price { 99.99 }
     end
   end
 end

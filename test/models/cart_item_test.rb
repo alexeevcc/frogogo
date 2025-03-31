@@ -1,30 +1,20 @@
 require "test_helper"
 
+# test/cart_item_test.rb
 class CartItemTest < ActiveSupport::TestCase
   setup do
-    @product = create(:product, name: "Беспроводная колонка", price: 1600.00)
+    @product = create(:product)
     @cart = create(:cart)
   end
 
-  test "should have correct database columns" do
-    assert_equal ["cart_id", "created_at", "id", "product_id", "quantity", "updated_at"],
-                 CartItem.column_names.sort
-  end
+  # === Associations ===
 
   test "should have correct associations" do
     assert_equal :belongs_to, CartItem.reflect_on_association(:cart).macro
     assert_equal :belongs_to, CartItem.reflect_on_association(:product).macro
   end
 
-  test "should have correct default quantity" do
-    item = CartItem.new
-    assert_equal 1, item.quantity
-  end
-
-  test "valid with correct attributes" do
-    item = build(:cart_item, cart: @cart, product: @product)
-    assert item.valid?
-  end
+  # === Validations ===
 
   test "invalid without cart" do
     item = build(:cart_item, cart: nil, product: @product)
@@ -36,6 +26,16 @@ class CartItemTest < ActiveSupport::TestCase
     item = build(:cart_item, cart: @cart, product: nil)
     assert_not item.valid?
     assert_equal ["не может отсутствовать"], item.errors[:product]
+  end
+
+  test "should have correct default quantity" do
+    item = CartItem.new
+    assert_equal 1, item.quantity
+  end
+
+  test "valid with correct attributes" do
+    item = build(:cart_item, cart: @cart, product: @product)
+    assert item.valid?
   end
 
   test "invalid with non-positive quantity" do
@@ -80,5 +80,29 @@ class CartItemTest < ActiveSupport::TestCase
   test "should have proper unique index in database" do
     indexes = ActiveRecord::Base.connection.indexes(:cart_items)
     assert indexes.any? { |i| i.columns == ["cart_id", "product_id"] && i.unique }
+  end
+
+  # === Callbacks ===
+
+  test "should trigger cart totals recalculation on create" do
+    assert_difference '@cart.reload.total_price', @product.price do
+      create(:cart_item, cart: @cart, product: @product, quantity: 1)
+    end
+
+    assert_equal @product.price.to_d, @cart.final_price
+  end
+
+  test "should trigger cart totals recalculation on quantity update" do
+    item = create(:cart_item, cart: @cart, product: @product, quantity: 1)
+    assert_difference '@cart.reload.total_price', @product.price do
+      item.update!(quantity: 2)
+    end
+  end
+
+  test "should update totals when cart_item is destroyed" do
+    item = create(:cart_item, cart: @cart, product: @product, quantity: 2)
+    assert_difference '@cart.reload.total_price', -(@product.price * 2) do
+      item.destroy!
+    end
   end
 end

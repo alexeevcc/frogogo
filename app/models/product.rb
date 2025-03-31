@@ -1,3 +1,9 @@
+# t.string "image"
+# t.string "name", null: false
+# t.decimal "price", precision: 10, scale: 2, null: false
+# t.datetime "created_at", null: false
+# t.datetime "updated_at", null: false
+
 class Product < ApplicationRecord
   has_many :cart_items, dependent: :destroy
 
